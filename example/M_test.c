@@ -1,6 +1,6 @@
 ﻿/*
  * @Author: TianZerL
- * @LastEditTime: 2020-07-19 17:29:44
+ * @LastEditTime: 2020-07-19 17:37:58
  */
 
 #include "M_DataDefine.h"
@@ -56,7 +56,7 @@ void createData(Data *dataInfo, const char *name, int id)
 //链表
 ListManger list;
 
-void addData()
+void addData(void)
 {
     Data dataInfo;
     char buf[20];
@@ -70,7 +70,7 @@ void addData()
     addNode(&list, &dataInfo);
 }
 
-void delData()
+void delData(void)
 {
     Data dataInfo;
     int id;
@@ -80,7 +80,7 @@ void delData()
     delNode(&list, &dataInfo);
 }
 
-void updateData()
+void updateData(void)
 {
     Data dataInfo;
     int id;
@@ -101,28 +101,29 @@ void updateData()
     updateNode(&list, &dataInfo, &newDataInfo);
 }
 
-void sort()
+void sort(void)
 {
     sortList(&list, compare);
 }
 
-void print()
+void print(void)
 {
     printList(&list, printData);
 }
 
-void save()
+void save(void)
 {
     saveData(&list, "./data.dat") ? printf("保存成功\n") : printf("保存失败\n");
 }
 
-void load()
+void load(void)
 {
     loadData(&list, "./data.dat") ? printf("读取成功\n") : printf("读取失败\n");
 }
 
-void quit()
+void quit(void)
 {
+    //销毁链表
     destroyList(&list);
     exit(0);
 }
@@ -142,6 +143,7 @@ int main(void)
     char *header = "**********\n";
     char *footer = "**********\n";
 
+    //初始化链表
     initList(&list);
 
     for (;;)
