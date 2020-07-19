@@ -1,6 +1,6 @@
-/*
+ï»¿/*
  * @Author: TianZerL
- * @LastEditTime: 2020-07-19 16:22:17
+ * @LastEditTime: 2020-07-19 17:29:44
  */
 
 #include "M_DataDefine.h"
@@ -12,39 +12,39 @@
 #include <stdlib.h>
 #include <string.h>
 
-//½â¾öVS¶ÔÄ³Ğ©º¯ÊıµÄ°²È«ĞÔ¾¯¸æ
+//è§£å†³VSå¯¹æŸäº›å‡½æ•°çš„å®‰å…¨æ€§è­¦å‘Š
 #ifdef _MSC_VER
 #define SCANF(F, V) scanf_s(F, V);
 #else
 #define SCANF(F, V) scanf(F, V);
 #endif
 
-//×Ô¶¨ÒåÊı¾İÀàĞÍ
+//è‡ªå®šä¹‰æ•°æ®ç±»å‹
 typedef struct
 {
     char name[20];
     int id;
 } myData;
 
-//ÊµÏÖ±È½Ïº¯Êı£¬¸Ãº¯Êı±ØĞëÓÉÊ¹ÓÃÕß×ÔĞĞÊµÏÖ£¬ÉùÃ÷ÓÚM_DataDefine.c
+//å®ç°æ¯”è¾ƒå‡½æ•°ï¼Œè¯¥å‡½æ•°å¿…é¡»ç”±ä½¿ç”¨è€…è‡ªè¡Œå®ç°ï¼Œå£°æ˜äºM_DataDefine.c
 mBool isEqualUserData(void *dataA, void *dataB)
 {
     return ((myData *)dataA)->id == ((myData *)dataB)->id;
 }
 
-//»Øµ÷º¯Êı£¬×Ô¶¨ÒåÊı¾İ´òÓ¡·½Ê½
+//å›è°ƒå‡½æ•°ï¼Œè‡ªå®šä¹‰æ•°æ®æ‰“å°æ–¹å¼
 void printData(void *data)
 {
     printf("name: %s\nid: %d\n", ((myData *)data)->name, ((myData *)data)->id);
 }
 
-//»Øµ÷º¯Êı£¬×Ô¶¨ÒåÊı¾İ±È½Ï·½Ê½
+//å›è°ƒå‡½æ•°ï¼Œè‡ªå®šä¹‰æ•°æ®æ¯”è¾ƒæ–¹å¼
 mBool compare(Data *dataInfoA, Data *dataInfoB)
 {
     return ((myData *)dataInfoA->data)->id > ((myData *)dataInfoB->data)->id;
 }
 
-//´´½¨Êı¾İ
+//åˆ›å»ºæ•°æ®
 void createData(Data *dataInfo, const char *name, int id)
 {
     myData data;
@@ -53,7 +53,7 @@ void createData(Data *dataInfo, const char *name, int id)
     dataFactor(dataInfo, &data, sizeof(data));
 }
 
-//Á´±í
+//é“¾è¡¨
 ListManger list;
 
 void addData()
@@ -113,12 +113,12 @@ void print()
 
 void save()
 {
-    saveData(&list, "./data.dat") ? printf("±£´æ³É¹¦\n") : printf("±£´æÊ§°Ü\n");
+    saveData(&list, "./data.dat") ? printf("ä¿å­˜æˆåŠŸ\n") : printf("ä¿å­˜å¤±è´¥\n");
 }
 
 void load()
 {
-    loadData(&list, "./data.dat") ? printf("¶ÁÈ¡³É¹¦\n") : printf("¶ÁÈ¡Ê§°Ü\n");
+    loadData(&list, "./data.dat") ? printf("è¯»å–æˆåŠŸ\n") : printf("è¯»å–å¤±è´¥\n");
 }
 
 void quit()
@@ -130,14 +130,14 @@ void quit()
 int main(void)
 {
     Item items[] = {
-        {"1.Ìí¼ÓÊı¾İ", addData},
-        {"2.É¾³ıÊı¾İ", delData},
-        {"3.ĞŞ¸ÄÊı¾İ", updateData},
-        {"4.Êı¾İÅÅĞò", sort},
-        {"5.´òÓ¡Êı¾İ", print},
-        {"6.±£´æÊı¾İ", save},
-        {"7.¶ÁÈ¡Êı¾İ", load},
-        {"8.ÍË³ö", quit}};
+        {"1.æ·»åŠ æ•°æ®", addData},
+        {"2.åˆ é™¤æ•°æ®", delData},
+        {"3.ä¿®æ”¹æ•°æ®", updateData},
+        {"4.æ•°æ®æ’åº", sort},
+        {"5.æ‰“å°æ•°æ®", print},
+        {"6.ä¿å­˜æ•°æ®", save},
+        {"7.è¯»å–æ•°æ®", load},
+        {"8.é€€å‡º", quit}};
 
     char *header = "**********\n";
     char *footer = "**********\n";
