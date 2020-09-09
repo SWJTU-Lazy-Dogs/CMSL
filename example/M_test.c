@@ -1,13 +1,15 @@
 ﻿/*
  * @Author: TianZerL
- * @LastEditTime: 2020-07-19 17:37:58
+ * @LastEditTime: 2020-09-09 22:37:58
  */
 
+//CMSL头文件
 #include "M_DataDefine.h"
 #include "M_DataStructure.h"
 #include "M_IO.h"
 #include "M_Display.h"
 
+//系统头文件
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -19,7 +21,7 @@
 #define SCANF(F, V) scanf(F, V);
 #endif
 
-//自定义数据类型
+//自定义交由Data结构体管理的数据类型
 typedef struct
 {
     char name[20];
@@ -50,6 +52,7 @@ void createData(Data *dataInfo, const char *name, int id)
     myData data;
     memcpy(data.name, name, strlen(name) + 1);
     data.id = id;
+    //生产Data结构体
     dataFactor(dataInfo, &data, sizeof(data));
 }
 
@@ -61,11 +64,14 @@ void addData(void)
     Data dataInfo;
     char buf[20];
     int id;
+
     printf("name:\n");
     fgets(buf, 20, stdin);
     buf[strlen(buf) - 1] = 0;
+
     printf("id:\n");
     SCANF("%d%*c", &id);
+
     createData(&dataInfo, buf, id);
     addNode(&list, &dataInfo);
 }
@@ -74,8 +80,10 @@ void delData(void)
 {
     Data dataInfo;
     int id;
+
     printf("id:\n");
     SCANF("%d%*c", &id);
+
     createData(&dataInfo, "tmp", id);
     delNode(&list, &dataInfo);
 }
