@@ -8,6 +8,7 @@
 #include "M_DataStructure.h"
 #include "M_IO.h"
 #include "M_Display.h"
+#include "M_DIY.h"
 
 //系统头文件
 #include <stdio.h>
@@ -37,7 +38,7 @@ mBool isEqualUserData(void *dataA, void *dataB)
 //回调函数，自定义数据打印方式
 void printData(void *data)
 {
-    printf("name: %s\nid: %d\n", ((myData *)data)->name, ((myData *)data)->id);
+    printf(printFormat, ((myData *)data)->name, ((myData *)data)->id);
 }
 
 //回调函数，自定义数据比较方式
@@ -65,11 +66,11 @@ void addData(void)
     char buf[20];
     int id;
 
-    printf("name:\n");
+    printf(NamePrompt);
     fgets(buf, 20, stdin);
     buf[strlen(buf) - 1] = 0;
 
-    printf("id:\n");
+    printf(IdPrompt);
     SCANF("%d%*c", &id);
 
     createData(&dataInfo, buf, id);
@@ -81,7 +82,7 @@ void delData(void)
     Data dataInfo;
     int id;
 
-    printf("id:\n");
+    printf(IdPrompt);
     SCANF("%d%*c", &id);
 
     createData(&dataInfo, "tmp", id);
@@ -92,17 +93,17 @@ void updateData(void)
 {
     Data dataInfo;
     int id;
-    printf("id:\n");
+    printf(IdPrompt);
     SCANF("%d%*c", &id);
     createData(&dataInfo, "tmp", id);
 
     Data newDataInfo;
     char buf[20];
     int newId;
-    printf("new name:\n");
+    printf(NewNamePrompt);
     fgets(buf, 20, stdin);
     buf[strlen(buf) - 1] = 0;
-    printf("new id:\n");
+    printf(NewIdPrompt);
     SCANF("%d%*c", &newId);
     createData(&newDataInfo, buf, newId);
 
@@ -121,12 +122,12 @@ void print(void)
 
 void save(void)
 {
-    saveData(&list, "./data.dat") ? printf("保存成功\n") : printf("保存失败\n");
+    saveData(&list, "./data.dat") ? printf(WriteSuccess) : printf(WriteFailure);
 }
 
 void load(void)
 {
-    loadData(&list, "./data.dat") ? printf("读取成功\n") : printf("读取失败\n");
+    loadData(&list, "./data.dat") ? printf(ReadSuccess) : printf(ReadFailure);
 }
 
 void quit(void)
@@ -139,23 +140,21 @@ void quit(void)
 int main(void)
 {
     Item items[] = {
-        {"1.添加数据", addData},
-        {"2.删除数据", delData},
-        {"3.修改数据", updateData},
-        {"4.数据排序", sort},
-        {"5.打印数据", print},
-        {"6.保存数据", save},
-        {"7.读取数据", load},
-        {"8.退出", quit}};
+        {Choice1, addData},
+        {Choice2, delData},
+        {Choice3, updateData},
+        {Choice4, sort},
+        {Choice5, print},
+        {Choice6, save},
+        {Choice7, load},
+        {Choice8, quit}};
 
-    char *header = "**********\n";
-    char *footer = "**********\n";
+    const char *header = HeadBar;
+    const char *footer = BottomBar;
 
     //初始化链表
     initList(&list);
 
-    for (;;)
-    {
+    while(1)
         menuWithCallback(8, items, NULL, header, footer, NULL);
-    }
 }

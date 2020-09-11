@@ -10,10 +10,9 @@
 
 typedef struct
 {
-    char info[50];
+    const char *info;
     void (*callback)(void);
 } Item;
-
 
 /*显示菜单并阻塞等待用户输入，返回用户选中项目的序号
 itemCount：项目数
